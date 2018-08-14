@@ -6,7 +6,6 @@ ENV BAMBOO_USER=bamboo
 ENV BAMBOO_GROUP=bamboo
 ENV BAMBOO_USER_HOME=/home/${BAMBOO_USER}
 ENV BAMBOO_JMS_CONNECTION_PORT=54663
-ENV BAMBOO_HOST=localhost
 
 ENV BAMBOO_SERVER_HOME          /var/atlassian/application-data/bamboo
 ENV BAMBOO_SERVER_INSTALL_DIR   /opt/atlassian/bamboo
@@ -17,7 +16,9 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y wget curl git bash procps openssl openjdk-8-jdk
+    apt-get install -y curl git bash procps openssl openjdk-8-jdk
+#install Maven separately to avoid JDK 10 installation
+RUN apt-get install -y maven
 
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser ${BAMBOO_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password
@@ -36,6 +37,8 @@ RUN chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_SERVER_HOME}"
 COPY entrypoint.sh              /entrypoint.sh
 RUN chown ${BAMBOO_USER}:${BAMBOO_GROUP} /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+#create symlink to automate capability detection
+RUN ln -s /usr/share/maven /usr/share/maven3
 
 VOLUME ["${BAMBOO_SERVER_HOME}"]
 

@@ -5,11 +5,15 @@ set -euo pipefail
 
 : ${JAVA_OPTS:=}
 
-: ${BAMBOO_BROKER_CLIENT_URI:="failover:\(tcp://${BAMBOO_HOST}:${BAMBOO_JMS_CONNECTION_PORT}?wireFormat.maxInactivityDuration=300000\)"}
+: ${BAMBOO_HOST:="unset"}
 
-export JAVA_OPTS="${JAVA_OPTS} ${CATALINA_OPTS} -Dbamboo.jms.broker.client.uri=${BAMBOO_BROKER_CLIENT_URI}"
-
-echo "JAVA_OPTS=$JAVA_OPTS"
+if [[ "${BAMBOO_HOST}" = "unset" ]]; then
+    echo "BAMBOO_HOST is unset, automatically detect host name"
+    BAMBOO_BROKER_CLIENT_URI=""
+else
+    : ${BAMBOO_BROKER_CLIENT_URI:="-Dbamboo.jms.broker.client.uri=failover:\(tcp://${BAMBOO_HOST}:${BAMBOO_JMS_CONNECTION_PORT}?wireFormat.maxInactivityDuration=300000\)?initialReconnectDelay=15000\&maxReconnectAttempts=10"}
+fi
+export JAVA_OPTS="${JAVA_OPTS} ${CATALINA_OPTS} ${BAMBOO_BROKER_CLIENT_URI}"
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
