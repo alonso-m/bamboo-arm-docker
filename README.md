@@ -21,8 +21,7 @@ Volume permission is managed by entry scripts. To get started you can use a data
 Note that this command can be replaced by named volumes.
 
 Start Atlassian Bamboo:
-
-    $> docker run -v /data/bamboo:/var/atlassian/application-data/bamboo --name="bamboo" -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
+    $> docker run -v /data/bamboo:/var/atlassian/application-data/bamboo --name="bamboo-server" --host=bamboo-server -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
 
 **Success**. Bamboo is now available on [http://localhost:8085](http://localhost:8085)*
 
@@ -30,8 +29,6 @@ Please ensure your container has the necessary resources allocated to it.
 We recommend 2GiB of memory allocated to accommodate the application server.
 See [Supported Platforms](https://confluence.atlassian.com/display/Bamboo/Supported+platforms) for further information.
     
-
-_* Note: If you are using `docker-machine` on Mac OS X, please use `open http://$(docker-machine ip default):8085` instead._
 
 ## JVM Configuration
 
@@ -48,11 +45,6 @@ If you need to override Bamboo's default memory configuration or pass additional
 * `JVM_SUPPORT_RECOMMENDED_ARGS` (default: NONE)
 
    Additional JVM arguments for Bamboo, such as a custom Java Trust Store
-
-* `BAMBOO_HOST` (default: localhost)
-
-   External instance host name used by remote agent for connection. It should be reachable by agent.
-
 
 # Upgrade
 
