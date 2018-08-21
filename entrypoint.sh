@@ -1,19 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-: ${CATALINA_OPTS:=}
-
 : ${JAVA_OPTS:=}
 
-: ${BAMBOO_HOST:="unset"}
-
-if [[ "${BAMBOO_HOST}" = "unset" ]]; then
-    echo "BAMBOO_HOST is unset, automatically detect host name"
-    BAMBOO_BROKER_CLIENT_URI=""
-else
-    : ${BAMBOO_BROKER_CLIENT_URI:="-Dbamboo.jms.broker.client.uri=failover:\(tcp://${BAMBOO_HOST}:${BAMBOO_JMS_CONNECTION_PORT}?wireFormat.maxInactivityDuration=300000\)?initialReconnectDelay=15000\&maxReconnectAttempts=10"}
-fi
-export JAVA_OPTS="${JAVA_OPTS} ${CATALINA_OPTS} ${BAMBOO_BROKER_CLIENT_URI}"
+export JAVA_OPTS="${JAVA_OPTS}"
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
@@ -27,7 +17,7 @@ if [ "${UID}" -eq 0 ]; then
             chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_SERVER_HOME}"
     fi
     # Now drop privileges
-    exec su -s /bin/bash "${BAMBOO_USER}" -c "${BAMBOO_SERVER_INSTALL_DIR}/bin/start-bamboo.sh -fg ${ARGS}"
+    exec su -s /bin/bash "${BAMBOO_USER}" -c "${BAMBOO_SERVER_INSTALL_DIR}/bin/start-bamboo.sh -fg"
 else
     exec "${BAMBOO_SERVER_INSTALL_DIR}/bin/start-bamboo.sh" "-fg"
 fi
