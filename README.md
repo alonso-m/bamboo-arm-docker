@@ -16,14 +16,16 @@ For the `BAMBOO_HOME` directory that is used to store the configuration data
 Volume permission is managed by entry scripts. To get started you can use a data volume, or named volumes. In this example we'll use named volumes.
 
     $> docker volume create --name bambooVolume
-    $> docker run -v bambooVolume:/var/atlassian/application-data/bamboo --name="bamboo" -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
+    $> docker run -v bambooVolume:/var/atlassian/application-data/bamboo --name="bamboo" --init -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
 
 Note that this command can be replaced by named volumes.
 
 Start Atlassian Bamboo:
-    $> docker run -v /data/bamboo:/var/atlassian/application-data/bamboo --name="bamboo-server" --host=bamboo-server -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
+    $> docker run -v /data/bamboo:/var/atlassian/application-data/bamboo --name="bamboo-server" --host=bamboo-server --init -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
 
-**Success**. Bamboo is now available on [http://localhost:8085](http://localhost:8085)*
+**Success**. Bamboo is now available on [http://localhost:8085](http://localhost:8085)*. 
+
+Note that the `--init` flag is required to properly reap zombie processes.
 
 Please ensure your container has the necessary resources allocated to it.
 We recommend 2GiB of memory allocated to accommodate the application server.
