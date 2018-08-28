@@ -10,8 +10,8 @@ This Docker container makes it easy to get an instance of Bamboo up and running.
 
 # Quick Start
 
-For the `BAMBOO_HOME` directory that is used to store the configuration data
-(amongst other things) we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or via a named volume if using a docker version >= 1.9. 
+For the `BAMBOO_HOME` directory that is used to store, among other things, the configuration data
+ we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or using a named volume if you're using a Docker version 1.9 or later. 
 
 Volume permission is managed by entry scripts. To get started you can use a data volume, or named volumes. In this example we'll use named volumes.
 
@@ -27,7 +27,7 @@ Start Atlassian Bamboo:
 
 Note that the `--init` flag is required to properly reap zombie processes.
 
-Please ensure your container has the necessary resources allocated to it.
+Make sure your container has the necessary resources allocated to it.
 We recommend 2GiB of memory allocated to accommodate the application server.
 See [Supported Platforms](https://confluence.atlassian.com/display/Bamboo/Supported+platforms) for further information.
     
