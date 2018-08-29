@@ -1,6 +1,6 @@
-Bamboo is a continuous integration and continuous deployment server. 
+Bamboo is a continuous integration and continuous deployment server. Learn more about Bamboo: <https://www.atlassian.com/software/bamboo>
 
-Learn more about Bamboo: <https://www.atlassian.com/software/bamboo>
+If you are looking for **Bamboo Agent Docker Image** it can be found [here](https://hub.docker.com/r/atlassian/bamboo-agent-base/).
 
 # Overview
 
@@ -11,7 +11,7 @@ This Docker container makes it easy to get an instance of Bamboo up and running.
 # Quick Start
 
 For the `BAMBOO_HOME` directory that is used to store, among other things, the configuration data
- we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or using a named volume if you're using a Docker version 1.9 or later. 
+ we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or using a named volume. 
 
 Volume permission is managed by entry scripts. To get started you can use a data volume, or named volumes. In this example we'll use named volumes.
 
@@ -21,6 +21,7 @@ Volume permission is managed by entry scripts. To get started you can use a data
 Note that this command can be replaced by named volumes.
 
 Start Atlassian Bamboo:
+
     $> docker run -v /data/bamboo:/var/atlassian/application-data/bamboo --name="bamboo-server" --host=bamboo-server --init -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
 
 **Success**. Bamboo is now available on [http://localhost:8085](http://localhost:8085)*. 
@@ -73,10 +74,12 @@ For evaluations you can use the built-in database that will store its files in t
 The `latest` tag matches the most recent version of this repository. Thus using `atlassian/bamboo-server:latest` or `atlassian/bamboo-server` will ensure you are running the most up to date version of this image.
 
 However,  we ** strongly recommend ** that for non-eval workloads you select a specific version in order to prevent breaking changes from impacting your setup.
-You can use a specific minor version of Bamboo by using a version number
-tag: `atlassian/bamboo-server:6.7`. This will install the latest `6.7.x` version that
-is available.
 
 # Support
 
 For image and product support, go to [support.atlassian.com](https://support.atlassian.com/)
+
+# Know issues
+* No support for configuring a reverse proxy for Bamboo.
+* Repository Stored Specs are configured to be processed in Docker by default, but the Docker executable is not present on the server image. 
+    * You can disable processing Bamboo Specs in Docker on the **Administration > Security settings page**.
