@@ -74,12 +74,23 @@ For evaluations you can use the built-in database that will store its files in t
 The `latest` tag matches the most recent version of this repository. Thus using `atlassian/bamboo-server:latest` or `atlassian/bamboo-server` will ensure you are running the most up to date version of this image.
 
 However,  we ** strongly recommend ** that for non-eval workloads you select a specific version in order to prevent breaking changes from impacting your setup.
+You can use a specific minor version of Bamboo by using a version number tag: `atlassian/bamboo-server:6.7`. This will install the latest `6.7.x` stable version that is available.
+
+# Running Bamboo Server with a Remote Agent
+If you want to run Bamboo Server and Agent containers on one host (in one Docker engine), you will need to create a Docker network for them:
+
+    $> docker network create bamboo
+    
+You can start Bamboo Server and Agent using following commands:
+
+    $> docker run -v bambooVolume:/var/atlassian/application-data/bamboo --name bamboo-server --network bamboo --hostname bamboo-server --init -d -p 8085:8085 atlassian/bamboo-server
+    $> docker run -v bambooAgentVolume:/home/bamboo/bamboo-agent-home --name bamboo-agent --network bamboo --hostname bamboo-agent --init -d atlassian/bamboo-agent-base http://bamboo-server:8085
 
 # Support
 
 For image and product support, go to [support.atlassian.com](https://support.atlassian.com/)
 
-# Know issues
+# Known issues
 * No support for configuring a reverse proxy for Bamboo.
 * Repository Stored Specs are configured to be processed in Docker by default, but the Docker executable is not present on the server image. 
     * You can disable processing Bamboo Specs in Docker on the **Administration > Security settings page**.
