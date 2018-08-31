@@ -77,13 +77,13 @@ However,  we ** strongly recommend ** that for non-eval workloads you select a s
 You can use a specific minor version of Bamboo by using a version number tag: `atlassian/bamboo-server:6.7`. This will install the latest `6.7.x` stable version that is available.
 
 # Running Bamboo Server with a Remote Agent
-If you want to run Bamboo Server and Agent containers on one host (in one Docker engine) you will need to create a Docker network for them:
+If you want to run Bamboo Server and Agent containers on one host (in one Docker engine), you will need to create a Docker network for them:
 
     $> docker network create bamboo
     
-Then you can start Bamboo Server and Agent using following commands:
+You can start Bamboo Server and Agent using following commands:
 
-    $> docker run -v bambooVolume:/var/atlassian/application-data/bamboo --name bamboo-server --network bamboo --hostname bamboo-server --init -d -p 54663:54663 -p 8085:8085 atlassian/bamboo-server
+    $> docker run -v bambooVolume:/var/atlassian/application-data/bamboo --name bamboo-server --network bamboo --hostname bamboo-server --init -d -p 8085:8085 atlassian/bamboo-server
     $> docker run -v bambooAgentVolume:/home/bamboo/bamboo-agent-home --name bamboo-agent --network bamboo --hostname bamboo-agent --init -d atlassian/bamboo-agent-base http://bamboo-server:8085
 
 # Support
