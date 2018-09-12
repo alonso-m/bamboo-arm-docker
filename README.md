@@ -92,5 +92,3 @@ For image and product support, go to [support.atlassian.com](https://support.atl
 
 # Known issues
 * No support for configuring a reverse proxy for Bamboo.
-* Repository Stored Specs are configured to be processed in Docker by default, but the Docker executable is not present on the server image. 
-    * You can disable processing Bamboo Specs in Docker on the **Administration > Security settings page**.
