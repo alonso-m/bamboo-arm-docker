@@ -3,6 +3,10 @@ set -euo pipefail
 
 : ${JAVA_OPTS:=}
 
+# Bamboo should not run Repository-stored Specs in Docker while being run in a Docker container itself.
+# Only affects the installation phase. Has no effect once Bamboo is set up.
+JAVA_OPTS="${JAVA_OPTS} -Dbamboo.setup.rss.in.docker=false"
+
 export JAVA_OPTS="${JAVA_OPTS}"
 
 # Start Bamboo as the correct user.
@@ -16,7 +20,8 @@ if [ "${UID}" -eq 0 ]; then
             chmod -R 700 "${BAMBOO_SERVER_HOME}" &&
             chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_SERVER_HOME}"
     fi
-    # Now drop privileges
+
+    # Now drop privileges.
     exec su -s /bin/bash "${BAMBOO_USER}" -c "${BAMBOO_SERVER_INSTALL_DIR}/bin/start-bamboo.sh -fg"
 else
     exec "${BAMBOO_SERVER_INSTALL_DIR}/bin/start-bamboo.sh" "-fg"
