@@ -31,9 +31,8 @@ Note that the `--init` flag is required to properly reap zombie processes.
 Make sure your container has the necessary resources allocated to it.
 We recommend 2GiB of memory allocated to accommodate the application server.
 See [Supported Platforms](https://confluence.atlassian.com/display/Bamboo/Supported+platforms) for further information.
-    
 
-# JVM Configuration
+## JVM Configuration
 
 If you need to override Bamboo's default memory configuration or pass additional JVM arguments, use the environment variables below
 
@@ -96,7 +95,7 @@ For image and product support, go to [support.atlassian.com](https://support.atl
 
 # Change log
 
-### 6.7.0
+## 6.7.0
 
 Repository-stored Specs (RSS) are no longer processed in Docker by default. Running RSS in Docker was not possible because:
 
