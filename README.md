@@ -31,7 +31,6 @@ Note that the `--init` flag is required to properly reap zombie processes.
 Make sure your container has the necessary resources allocated to it.
 We recommend 2GiB of memory allocated to accommodate the application server.
 See [Supported Platforms](https://confluence.atlassian.com/display/Bamboo/Supported+platforms) for further information.
-    
 
 ## JVM Configuration
 
@@ -88,7 +87,20 @@ You can start Bamboo Server and Agent using following commands:
 
 # Support
 
-For image and product support, go to [support.atlassian.com](https://support.atlassian.com/)
+For image and product support, go to [support.atlassian.com](https://support.atlassian.com/).
 
 # Known issues
+
 * No support for configuring a reverse proxy for Bamboo.
+
+# Change log
+
+## 6.7.0
+
+Repository-stored Specs (RSS) are no longer processed in Docker by default. Running RSS in Docker was not possible because:
+
+* there is no Docker capability added on the Bamboo server by default,
+* the setup would require running Docker in Docker.
+
+The change will affect fresh Bamboo installations. Upgrades and XML imports will still require the RSS settings to be
+changed manually in *Administration* &rarr; *Security settings*.

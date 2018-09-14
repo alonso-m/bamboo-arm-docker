@@ -2,12 +2,14 @@
 set -euo pipefail
 
 : ${JAVA_OPTS:=}
+: ${CATALINA_OPTS:=}
 
 # Bamboo should not run Repository-stored Specs in Docker while being run in a Docker container itself.
 # Only affects the installation phase. Has no effect once Bamboo is set up.
-JAVA_OPTS="${JAVA_OPTS} -Dbamboo.setup.rss.in.docker=false"
+CATALINA_OPTS="${CATALINA_OPTS} -Dbamboo.setup.rss.in.docker=false"
 
 export JAVA_OPTS="${JAVA_OPTS}"
+export CATALINA_OPTS="${CATALINA_OPTS}"
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
