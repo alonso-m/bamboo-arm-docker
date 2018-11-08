@@ -95,7 +95,7 @@ For image and product support, go to [support.atlassian.com](https://support.atl
 
 # Change log
 
-## 6.7.0
+## 6.7.1
 
 Repository-stored Specs (RSS) are no longer processed in Docker by default. Running RSS in Docker was not possible because:
 
@@ -104,3 +104,7 @@ Repository-stored Specs (RSS) are no longer processed in Docker by default. Runn
 
 The change will affect fresh Bamboo installations. Upgrades and XML imports will still require the RSS settings to be
 changed manually in *Administration* &rarr; *Security settings*.
+
+Tomcat was upgraded to version 8.5.32. Default security settings were made more strict for umask, instead of 0022 it's 0027. If you want to keep same behavior use "-e UMASK=0022" variable when run Docker image, e.g.
+    
+    $> docker run -d --name=bamboo671  -p 8085:8085 -p 54663:54663 -e UMASK=0022 -v bambooVolume:/var/atlassian/application-data/bamboo atlassian/bamboo-server:6.7.1
