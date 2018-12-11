@@ -23,7 +23,7 @@ RUN apt-get install -y maven
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser ${BAMBOO_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password
 
-ARG DOWNLOAD_URL=https://downloads.atlassian.com/software/bamboo/downloads/atlassian-bamboo-${BAMBOO_VERSION}.tar.gz
+ARG DOWNLOAD_URL=https://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-${BAMBOO_VERSION}.tar.gz
 
 RUN mkdir -p ${BAMBOO_SERVER_INSTALL_DIR} && \
     mkdir -p ${BAMBOO_SERVER_HOME}
