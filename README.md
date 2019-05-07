@@ -1,4 +1,4 @@
-Bamboo is a continuous integration and continuous deployment server. Learn more about Bamboo: <https://www.atlassian.com/software/bamboo>
+Bamboo is a continuous integration and continuous deployment server. Learn more about [Bamboo](<https://www.atlassian.com/software/bamboo>).
 
 If you are looking for **Bamboo Agent Docker Image** it can be found [here](https://hub.docker.com/r/atlassian/bamboo-agent-base/).
 
