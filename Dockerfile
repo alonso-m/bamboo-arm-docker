@@ -16,7 +16,7 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git bash procps openssl openjdk-8-jdk
+    apt-get install -y curl git bash procps openssl libtcnative-1 openjdk-8-jdk
 #install Maven separately to avoid JDK 10 installation
 RUN apt-get install -y maven
 
@@ -25,8 +25,10 @@ RUN addgroup ${BAMBOO_GROUP} && \
 
 ARG DOWNLOAD_URL=https://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-${BAMBOO_VERSION}.tar.gz
 
-RUN mkdir -p ${BAMBOO_SERVER_INSTALL_DIR} && \
-    mkdir -p ${BAMBOO_SERVER_HOME}
+RUN mkdir -p ${BAMBOO_SERVER_INSTALL_DIR}/lib/native && \
+    mkdir -p ${BAMBOO_SERVER_HOME} && \
+    ln --symbolic "/usr/lib/x86_64-linux-gnu/libtcnative-1.so" "${BAMBOO_SERVER_INSTALL_DIR}/lib/native/libtcnative-1.so";
+
 RUN curl -L --silent ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "$BAMBOO_SERVER_INSTALL_DIR"
 
 RUN echo "bamboo.home=${BAMBOO_SERVER_HOME}" > $BAMBOO_SERVER_INSTALL_DIR/atlassian-bamboo/WEB-INF/classes/bamboo-init.properties
