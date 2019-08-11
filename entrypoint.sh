@@ -10,6 +10,9 @@ CATALINA_OPTS="${CATALINA_OPTS} -Dbamboo.setup.rss.in.docker=false"
 
 export JAVA_OPTS="${JAVA_OPTS}"
 export CATALINA_OPTS="${CATALINA_OPTS}"
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+export LANGUAGE=C.UTF-8
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
