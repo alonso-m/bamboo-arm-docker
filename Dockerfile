@@ -1,4 +1,5 @@
-FROM arm32v7/openjdk:11-jdk
+
+FROM arm32v7/adoptopenjdk:11-jdk-hotspot-bionic
 
 ARG BAMBOO_VERSION=7.0.3
 ENV BAMBOO_USER=bamboo
