@@ -15,7 +15,7 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git bash procps openssl libtcnative-1 openjdk-8-jdk
+    apt-get install -y curl git bash procps openssl libtcnative-1 
 #install Maven separately to avoid JDK 10 installation
 RUN apt-get install -y maven
 
