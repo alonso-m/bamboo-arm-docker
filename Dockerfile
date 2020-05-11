@@ -1,7 +1,6 @@
-FROM ubuntu:18.04
-MAINTAINER Atlassian Bamboo Team
+FROM arm64v8/openjdk:8-jdk
 
-ARG BAMBOO_VERSION=
+ARG BAMBOO_VERSION=7.0.3
 ENV BAMBOO_USER=bamboo
 ENV BAMBOO_GROUP=bamboo
 ENV BAMBOO_USER_HOME=/home/${BAMBOO_USER}
@@ -16,7 +15,7 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git bash procps openssl libtcnative-1 openjdk-8-jdk
+    apt-get install -y curl git bash procps openssl libtcnative-1 
 #install Maven separately to avoid JDK 10 installation
 RUN apt-get install -y maven
 
