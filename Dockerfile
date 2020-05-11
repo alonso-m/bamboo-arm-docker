@@ -1,4 +1,4 @@
-FROM arm64v8/openjdk:11-jdk
+FROM arm64v8/adoptopenjdk:11-jdk-hotspot
 
 ARG BAMBOO_VERSION=7.0.3
 ENV BAMBOO_USER=bamboo
