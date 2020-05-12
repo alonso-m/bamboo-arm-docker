@@ -24,7 +24,7 @@ ARG DOWNLOAD_URL=https://www.atlassian.com/software/bamboo/downloads/binary/atla
 
 RUN mkdir -p ${BAMBOO_SERVER_INSTALL_DIR}/lib/native && \
     mkdir -p ${BAMBOO_SERVER_HOME} && \
-    ln --symbolic "/usr/lib/arm-linux-gnueabihf/libtcnative-1.so" "${BAMBOO_SERVER_INSTALL_DIR}/lib/native/libtcnative-1.so";
+    ln --symbolic "/usr/lib/aarch64-linux-gnu/libtcnative-1.so" "${BAMBOO_SERVER_INSTALL_DIR}/lib/native/libtcnative-1.so";
 
 RUN curl -L --silent ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "$BAMBOO_SERVER_INSTALL_DIR"
 
