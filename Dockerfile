@@ -15,7 +15,7 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git bash procps openssl openssl-client libtcnative-1 maven
+    apt-get install -y curl git bash procps openssl libtcnative-1 maven
 
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser ${BAMBOO_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password
