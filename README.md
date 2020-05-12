@@ -1,6 +1,6 @@
 # bamboo-server-arm-docker
 
-This is a fork of the original Atlassian Bamboo server docker image modified to work on ARM architecture. The original repository can be found here: https://bitbucket.org/atlassian-docker/docker-atlassian-bamboo-server/src/master/
+This is a fork of the original Atlassian Bamboo server docker image modified to work on ARM architecture. The original repository can be found here: https://bitbucket.org/atlassian-docker/docker-bamboo-server/src/master/
 
 This repository consists of two branches: arm64v8 and arm32v7.
 

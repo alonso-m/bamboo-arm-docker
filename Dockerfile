@@ -1,4 +1,4 @@
-FROM arm64v8/openjdk:8-jdk
+FROM arm64v8/adoptopenjdk:8-jdk-hotspot
 
 ARG BAMBOO_VERSION=7.0.3
 ENV BAMBOO_USER=bamboo
@@ -15,9 +15,7 @@ EXPOSE $BAMBOO_JMS_CONNECTION_PORT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git bash procps openssl libtcnative-1 
-#install Maven separately to avoid JDK 10 installation
-RUN apt-get install -y maven
+    apt-get install -y curl git bash procps openssl openssl-client libtcnative-1 maven
 
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser ${BAMBOO_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password
