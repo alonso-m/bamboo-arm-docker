@@ -1,6 +1,6 @@
 FROM arm32v7/adoptopenjdk:8-jdk-hotspot-bionic
 
-ARG BAMBOO_VERSION=7.1.3
+ARG BAMBOO_VERSION=7.1.4
 ENV BAMBOO_USER=bamboo
 ENV BAMBOO_GROUP=bamboo
 ENV BAMBOO_USER_HOME=/home/${BAMBOO_USER}
