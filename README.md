@@ -12,3 +12,5 @@ For instructions on how to run the docker images, please refer to the original A
 
 Note that Atlassian does not officially support Bamboo server on ARM. However, I have had no issues while running this custom docker image.
 The only changes applied to the Dockerfile are basically changing the Java version that the image runs on.
+
+
